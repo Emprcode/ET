@@ -1,9 +1,9 @@
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-   
+      <h2>fuck you</h2>
     </div>
   );
 }
