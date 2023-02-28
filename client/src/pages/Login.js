@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { CustomForm } from "../components/customFields/CustomForm";
+import { fetchUser } from "../components/helper/axiosHelper";
 import { MainLayout } from "../components/layout/MainLayout";
 
 const Login = () => {
+  const navigate = useNavigate("");
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
   const inputs = [
     {
       label: "Email",
@@ -11,6 +17,7 @@ const Login = () => {
       name: "email",
       required: true,
       placeholder: "email@email.com",
+      forwardref: emailRef,
     },
     {
       label: "Password",
@@ -18,8 +25,24 @@ const Login = () => {
       name: "password",
       required: true,
       placeholder: "******",
+      forwardref: passwordRef,
     },
   ];
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const obj = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    const { status, message } = await fetchUser(obj);
+    toast[status](message);
+    console.log(obj);
+
+    status === "success" && navigate("/dashboard");
+  };
+
   return (
     <MainLayout>
       <Container>
@@ -31,7 +54,7 @@ const Login = () => {
             </div>
           </Col>
           <Col>
-            <Form>
+            <Form onSubmit={handleOnSubmit}>
               <h3>Login</h3>
               <hr />
               {inputs.map((item, i) => (
