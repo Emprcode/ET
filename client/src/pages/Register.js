@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { CustomForm } from "../components/customFields/CustomForm";
 import { MainLayout } from "../components/layout/MainLayout";
 import {toast} from 'react-toastify'
+import { postUser } from "../components/helper/axiosHelper";
 
 const Login = () => {
   const [form, setForm] = useState({});
@@ -17,9 +18,9 @@ const Login = () => {
 
   const handleOnSubmit = async e=> {
     e.preventDefault()
-  //   const {status, message} = await postUser(form)
+    const {status, message} = await postUser(form)
 
-  //   toast[status](message)
+    toast[status](message)
   }
 
   const inputs = [
