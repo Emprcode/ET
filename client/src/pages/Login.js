@@ -38,7 +38,6 @@ const Login = () => {
 
     const { status, message } = await fetchUser(obj);
     toast[status](message);
-    console.log(obj);
 
     status === "success" && navigate("/dashboard");
   };
