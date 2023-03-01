@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import UserRouter from './src/router/UserRouter.js'
 import { connectDb } from './src/configDb/DbConfig.js'
+import TransRouter from './src/router/TransRouter.js'
 
 const app = express()
 
@@ -19,6 +20,7 @@ connectDb()
 
 //router
 app.use("/api/v1/user", UserRouter)
+app.use("/api/v1/transaction", TransRouter)
 
 //uncaught error handler
 
