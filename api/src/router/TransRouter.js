@@ -7,9 +7,10 @@ const router = express.Router();
 
 router.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
+    
+    const {Authorization} = req.headers
 
-    const result = await addTrans(req.body);
+    const result = await addTrans({...req.body, userId: Authorization});
     result?._id
       ? res.json({
           status: "success",

@@ -4,6 +4,7 @@ import cors from 'cors'
 import UserRouter from './src/router/UserRouter.js'
 import { connectDb } from './src/configDb/DbConfig.js'
 import TransRouter from './src/router/TransRouter.js'
+import { userAuth } from './src/middleware/authMiddleware.js'
 
 const app = express()
 
@@ -20,7 +21,7 @@ connectDb()
 
 //router
 app.use("/api/v1/user", UserRouter)
-app.use("/api/v1/transaction", TransRouter)
+app.use("/api/v1/transaction", userAuth, TransRouter)
 
 //uncaught error handler
 

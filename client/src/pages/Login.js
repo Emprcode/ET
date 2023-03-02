@@ -36,10 +36,13 @@ const Login = () => {
       password: passwordRef.current.value,
     };
 
-    const { status, message } = await fetchUser(obj);
+    const { status, message, result } = await fetchUser(obj);
     toast[status](message);
 
-    status === "success" && navigate("/dashboard");
+    if (status === "success" && result?._id) {
+      sessionStorage.setItem("user", JSON.stringify(result))
+      navigate("/dashboard")
+    }
   };
 
   return (
