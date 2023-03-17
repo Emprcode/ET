@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { MainLayout } from "../components/layout/MainLayout";
 
 const DashBoard = () => {
+  const {selects, setSelects} = useState()
  
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -10,6 +11,7 @@ const DashBoard = () => {
 
 
   };
+  console.log(selects)
 
   return (
     <MainLayout>
@@ -24,7 +26,12 @@ const DashBoard = () => {
           <Form.Control placeholder="Transaction name" />
         </Col>
         <Col>
-          <Form.Control placeholder="Income/Expenses" />
+          {/* <Form.Control placeholder="Income/Expenses" /> */}
+          <select value={selects} onChange={e => setSelects(e.target.value)}>
+            <option></option>
+            <option>Income</option>
+            <option>Expense</option>
+          </select>
        
         </Col>
         <Col>
