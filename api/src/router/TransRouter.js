@@ -8,9 +8,9 @@ const router = express.Router();
 router.post("/", async (req, res, next) => {
   try {
     
-    const {Authorization} = req.headers
+    const {authorization} = req.headers
 
-    const result = await addTrans({...req.body, userId: Authorization});
+    const result = await addTrans({...req.body, userId: authorization});
     result?._id
       ? res.json({
           status: "success",
